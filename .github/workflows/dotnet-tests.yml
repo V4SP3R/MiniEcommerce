@@ -1,0 +1,23 @@
+name: Build and unit tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Restore dependencies
+        run: dotnet restore MiniEcommerce.sln
+      - name: Build
+        run: dotnet build MiniEcommerce.sln --configuration Release --no-restore
+      - name: Run unit tests
+        run: dotnet test MiniEcommerce.sln --configuration Release --no-build --verbosity normal
