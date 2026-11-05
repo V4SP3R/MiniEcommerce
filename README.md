@@ -1,5 +1,7 @@
 # MiniEcommerce — Console .NET + testes xUnit
 
+[![Build and unit tests](https://github.com/V4SP3R/MiniEcommerce/actions/workflows/dotnet-tests.yml/badge.svg)](https://github.com/V4SP3R/MiniEcommerce/actions/workflows/dotnet-tests.yml)
+
 Projeto acadêmico da disciplina **Gestão e Qualidade de Software / Garantia da Qualidade de Software**.
 O objetivo é desenvolver um mini e-commerce em C# com **TDD básico**, **testes unitários xUnit** e histórico Git em **Conventional Commits**.
 
@@ -97,19 +99,21 @@ Exemplos de mensagens usadas:
 - `refactor(core): improve code readability and organize formatting`
 - `docs: add comprehensive instructions in README.md`
 
-> O uso de TDD aqui registra a ordem de criação dos testes e do código. A execução real da suíte deve ser confirmada em um ambiente com o SDK instalado (local ou pelo GitHub Actions).
+> O histórico registra a ordem de criação dos testes e do código. A versão final foi compilada e validada no GitHub Actions em 05/11/2026: **22 testes aprovados**, sem erros ou avisos de compilação.
 
-## Publicar no GitHub
+## Repositório e download
 
-Crie um repositório **público**, vazio, com o nome `MiniEcommerce`. Dentro da pasta do projeto, execute:
+Código e histórico completos: [V4SP3R/MiniEcommerce](https://github.com/V4SP3R/MiniEcommerce).
+
+Para baixar o projeto com o histórico Git:
 
 ```bash
-git remote add origin https://github.com/SEU_USUARIO/MiniEcommerce.git
-git branch -M main
-git push -u origin main
+git clone https://github.com/V4SP3R/MiniEcommerce.git
+cd MiniEcommerce
+dotnet test MiniEcommerce.sln
 ```
 
-Para projetos extraídos do ZIP com `.git`, **não use `git init` novamente**; o histórico completo já está presente.
+Os commits originais foram preservados na branch `main`. A validação automática executa a restauração, a compilação e os testes a cada push nessa branch ou pull request.
 
 ## Observações técnicas
 
@@ -117,3 +121,4 @@ Para projetos extraídos do ZIP com `.git`, **não use `git init` novamente**; o
 - O estoque é apenas consultado ao adicionar ao carrinho e é reduzido somente na confirmação do pedido.
 - Antes de atualizar qualquer produto, o checkout valida **todos** os saldos: caso algum esteja insuficiente, nenhuma baixa é realizada.
 - Não há bloqueio de concorrência entre usuários: a solução é um programa de console de instância única, sem persistência.
+
