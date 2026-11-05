@@ -65,8 +65,8 @@ while (true)
                 var pedido = checkout.FinalizarPedido(carrinho);
                 Console.WriteLine($"\nPedido confirmado: {pedido.Id}");
                 foreach (var item in pedido.Itens)
-                    Console.WriteLine($"- {item.NomeProduto} | {item.Quantidade} x {item.PrecoUnitario.ToString("C2", moeda)} = {item.Subtotal.ToString("C2", moeda)}");
-                Console.WriteLine($"TOTAL: {pedido.Total.ToString("C2", moeda)}");
+                    Console.WriteLine($"- {item.NomeProduto} | {item.Quantidade} x {Moeda(item.PrecoUnitario)} = {Moeda(item.Subtotal)}");
+                Console.WriteLine($"TOTAL: {Moeda(pedido.Total)}");
                 Console.WriteLine("Estoque atualizado e carrinho esvaziado.");
                 break;
 
@@ -98,7 +98,7 @@ void MostrarCatalogo()
     }
 
     foreach (Produto produto in produtos)
-        Console.WriteLine($"{produto.Id} - {produto.Nome} | {produto.Preco.ToString("C2", moeda)} | Estoque: {produto.QuantidadeEstoque}");
+        Console.WriteLine($"{produto.Id} - {produto.Nome} | {Moeda(produto.Preco)} | Estoque: {produto.QuantidadeEstoque}");
 }
 
 void MostrarCarrinho()
@@ -111,9 +111,9 @@ void MostrarCarrinho()
     }
 
     foreach (var item in carrinho.Itens)
-        Console.WriteLine($"{item.Produto.Id} - {item.Produto.Nome} | Qtde: {item.Quantidade} | Subtotal: {item.Subtotal.ToString("C2", moeda)}");
+        Console.WriteLine($"{item.Produto.Id} - {item.Produto.Nome} | Qtde: {item.Quantidade} | Subtotal: {Moeda(item.Subtotal)}");
 
-    Console.WriteLine($"Subtotal geral: {carrinho.Subtotal.ToString("C2", moeda)}");
+    Console.WriteLine($"Subtotal geral: {Moeda(carrinho.Subtotal)}");
 }
 
 static int LerInteiro(string mensagem)
@@ -135,3 +135,5 @@ static decimal LerDecimal(string mensagem)
         return numero;
     throw new FormatException("Informe um valor monetario valido (ex.: 29,90).");
 }
+
+string Moeda(decimal valor) => valor.ToString("C2", moeda);
